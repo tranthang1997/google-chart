@@ -1,0 +1,57 @@
+<app-sub-nav [pageTitle]="'page01.TITLE' | translate"></app-sub-nav>
+<span style="font-size: 0.75rem; color: #333333;">シフト希望を募集する期間と締切日時を設定し、スタッフにシフト希望の募集開始をお知らせします。</span>
+<form novalidate >
+  <div class="form-group">
+    <br>
+    <span class="span-time">募集期間<span style="color: red">※</span></span>
+    <input type="text" formControlName="startDate" class="form-control input-date date-picker" value="2017/06">
+    ~
+    <input formControlName="endDate" type="text" class="form-control input-date" value="2017/07">
+  </div>
+  <div class="form-group">
+    <span class="span-time">募集期間<span style="color: red">※</span></span>
+    <input type="text" class="form-control input-date" value="2017/06/01">
+    <input type="text" class="form-control small" value="11:00">
+  </div>
+  <div class="form-group">
+    <label for="備考">備考</label>
+    <textarea class="form-control" rows="5" id="備考" placeholder="3000文字以内"></textarea>
+    <label for="備考">0/3000</label>
+  </div>
+  <div class="form-group">
+    <label for="備考">募集項目<label style="color: red;padding-right: 15px">※1つ以上選択</label></label>
+    <div class="custom-control custom-checkbox custom-control-inline">
+      <input type="checkbox" class="custom-control-input" id="defaultInline1">
+      <label class="custom-control-label color-checkbox" for="defaultInline1">希望休</label>
+    </div>
+
+    <!-- Default inline 2-->
+    <div class="custom-control custom-checkbox custom-control-inline">
+      <input type="checkbox" class="custom-control-input" id="defaultInline2">
+      <label class="custom-control-label color-checkbox" for="defaultInline2">夜勤NG</label>
+    </div>
+
+    <!-- Default inline 3-->
+    <div class="custom-control custom-checkbox custom-control-inline">
+      <input type="checkbox" class="custom-control-input" id="defaultInline3">
+      <label class="custom-control-label color-checkbox" for="defaultInline3">夜勤希望</label>
+    </div>
+    <div class="custom-control custom-checkbox custom-control-inline">
+      <input type="checkbox" class="custom-control-input" id="defaultInline4">
+      <label class="custom-control-label color-checkbox" for="defaultInline4">外勤予定</label>
+    </div>
+    <div class="custom-control custom-checkbox custom-control-inline">
+      <input type="checkbox" class="custom-control-input" id="defaultInline5">
+      <label class="custom-control-label color-checkbox" for="defaultInline5">その他の予定 (学会・研修等)</label>
+    </div>
+
+    <span>
+    <br>
+    ※募集開始時にシフト希望を募集するお知らせがスタッフにメールと通知で送信されます。<br>
+    ※締切３日前と、締切当日の朝7:00に未提出のスタッフ宛にリマインドメールと通知が送信されます。<br>
+    ※募集開始をしたあとも編集・再募集できます。
+  </span>
+    <br><br>
+    <button type="submit" class="btn btn-custom" (click)="submitForm()"> 募集開始</button>
+  </div>
+</form>

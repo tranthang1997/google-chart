@@ -1,0 +1,17 @@
+{
+  "pageTitle": "Tiêu đề",
+  "month": {
+    "jan": "Tháng 1",
+    "feb": "Tháng 2",
+    "mar": "Tháng 3",
+    "apr": "Tháng 4",
+    "may": "Tháng 5",
+    "june": "Tháng 6",
+    "july": "Tháng 7",
+    "aug": "Tháng 8",
+    "sep": "Tháng 9",
+    "oct": "Tháng 10",
+    "nov": "Tháng 11",
+    "dec": "Tháng 12"
+  }
+}

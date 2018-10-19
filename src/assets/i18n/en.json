@@ -1,0 +1,17 @@
+{
+ "pageTitle": "Title",
+  "month": {
+    "jan": "Jan",
+    "feb": "feb",
+    "mar": "Mar",
+    "apr": "Apr",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "aug": "Aug",
+    "sep": "Sep",
+    "oct": "Oct",
+    "nov": "Nov",
+    "dec": "Dec"
+  }
+}
