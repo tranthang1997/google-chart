@@ -36,6 +36,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
     google.charts.load('current', {'packages': ['bar']});
     google.charts.setOnLoadCallback(this.drawChartColumn);
 
+    this.drawColumn1();
+
   }
   drawChartLine1() {
     const a = 0.1;
@@ -57,14 +59,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
     ]);
 
     const options = {
-      crosshair: { trigger: 'focus' },
-      selectionMode: 'multiple',
-      // Trigger tooltips
-      // on selections.
       tooltip: {trigger: 'selection', isHtml: true},
-      // Group selections
-      // by x-value.
-      aggregationTarget: 'category',
       legend: { position: 'none' },
       colors: ['black', 'blue', 'red'],
       titleTextStyle: {
@@ -136,6 +131,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
       },
       width: 480,
       height: 300,
+      crosshair: { trigger: 'both' , orientation: 'vertical', opacity: 1}
     };
 
     const chart = new google.charts.Line(document.getElementById('my-chart-line2'));
@@ -162,7 +158,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
       legend: { position: 'none' },
       colors: ['black', 'blue', 'red'],
       vAxis: {
-        format: '',
+        format: '#回',
         viewWindowMode: 'explicit',
         viewWindow: {min: 0},
         'textStyle': {
@@ -238,5 +234,39 @@ export class ChartComponent implements OnInit, AfterViewInit {
     const chart = new google.charts.Bar(document.getElementById('my-chart-column'));
 
     chart.draw(data, google.charts.Bar.convertOptions(options));
+  }
+
+  drawColumn1() {
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      const dataTable = new google.visualization.DataTable();
+      dataTable.addColumn('string', 'Year');
+      dataTable.addColumn('number', '');
+      dataTable.addColumn('number', '');
+      // A column for custom tooltip content
+      // dataTable.addColumn({type: 'string', role: 'tooltip'});
+      dataTable.addRows([
+        ['2010', 600, 800],
+        ['2011', 1500, 1000],
+        ['2012', 800, 400],
+        ['2013', 1000, 600]
+      ]);
+
+      const options = {
+        tooltip: {isHtml: true},
+        legend: 'none',
+        width: 500,
+        height: 300,
+        crosshair: { trigger: 'both' , orientation: 'vertical', opacity: 0.5},
+        vAxis: {
+          ticks: [0, 500, 1000, 1500, 2000]
+        },
+        pointShape: 'triangle',
+      };
+      const chart = new google.visualization.LineChart(document.getElementById('my-chart-column1'));
+      chart.draw(dataTable, options);
+    }
   }
 }
