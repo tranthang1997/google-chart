@@ -504,7 +504,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
     data.addColumn({type: 'string', role: 'annotation'});
 
     data.addRows([
-      ['0回', 0.1, 'ti2', 0.14, 'hi'],
+      ['0回', 0.19, '', 0.1, ''],
       ['1回', 0.117, '', 0.260, ''],
       ['2回', 0.360, '', 0.300, ''],
       ['3回', 0.1030, '', 0.240, ''],
@@ -541,11 +541,26 @@ export class ChartComponent implements OnInit, AfterViewInit {
         fontSize: 20
       },
       legend: { position: 'none' },
+      colors: ['blue', 'green'],
       width: 600,
       height: 300,
     };
 
     const chart = new google.visualization.ColumnChart(document.getElementById('my-chart-column'));
+    google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
     chart.draw(data, options);
+
+    function placeMarker(dataTable) {
+      const cli = chart.getChartLayoutInterface();
+      const chartArea = cli.getChartAreaBoundingBox();
+      console.log(cli.getYLocation(dataTable.getValue(0, 1)));
+      $('.overlay-marker-41')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 1))) + 30 + 'px';
+      $('.overlay-marker-41')[0].style.left = '110px';
+      $('.overlay-marker-41')[0].style.color = options.colors[0];
+      //
+      $('.overlay-marker-42')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 3))) + 30 + 'px';
+      $('.overlay-marker-42')[0].style.left = '132px';
+      $('.overlay-marker-42')[0].style.color = options.colors[1];
+    }
   }
 }
