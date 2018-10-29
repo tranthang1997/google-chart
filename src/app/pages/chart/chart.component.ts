@@ -86,9 +86,9 @@ export class ChartComponent implements OnInit, AfterViewInit {
       const value3 = randomData(0.4, 0.3);
       data.addRows([
         [new Date(2019, i),
-          value1, customTooltip(new Date(2018, 8), value1, options.colors[0], 'T'),
-          value2, customTooltip(new Date(2018, 8), value2, options.colors[1], 'TB'),
-          value3, customTooltip(new Date(2018, 8), value3, options.colors[2], 'TOP')],
+          value1, customTooltip(new Date(2019, i), value1, options.colors[0], 'T'),
+          value2, customTooltip(new Date(2019, i), value2, options.colors[1], 'TB'),
+          value3, customTooltip(new Date(2019, i), value3, options.colors[2], 'TOP')],
       ]);
     }
 
