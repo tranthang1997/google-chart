@@ -386,7 +386,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         fontSize: 20
       },
       legend: { position: 'none' },
-      colors: ['blue', 'green'],
+      colors: ['blue', 'red'],
       chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
       width: 620,
       height: 350
@@ -404,11 +404,11 @@ export class ChartComponent implements OnInit, AfterViewInit {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
       $('.overlay-marker-41')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 1))) + 30 + 'px';
-      $('.overlay-marker-41')[0].style.left = '75px';
+      $('.overlay-marker-41')[0].style.left = '80px';
       $('.overlay-marker-41')[0].style.color = options.colors[0];
       //
       $('.overlay-marker-42')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 3))) + 30 + 'px';
-      $('.overlay-marker-42')[0].style.left = '105px';
+      $('.overlay-marker-42')[0].style.left = '100px';
       $('.overlay-marker-42')[0].style.color = options.colors[1];
     }
   }
