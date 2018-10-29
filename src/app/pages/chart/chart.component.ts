@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, AfterViewInit, ElementRef} from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 
 declare var google: any;
 declare var googleLoaded: any;
@@ -10,15 +10,13 @@ declare var $: any;
 })
 export class ChartComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('myChart') myChart;
-
   pageTitle = 'Title';
+  monthChart1 = 4;
 
-  constructor(private el: ElementRef) {
+  constructor() {
   }
 
   ngOnInit() {
-    // const observable = Rx.Observable.create()
   }
 
   ngAfterViewInit(): void {
@@ -29,30 +27,21 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
     google.charts.load('current', {'packages': ['corechart']});
     google.charts.setOnLoadCallback(this.drawChartColumn);
-
   }
 
   drawChartLine1() {
-    function fomart(date: Date) {
-      if (date.getMonth() === 0) {
-        return date + '月\n' + date.getFullYear();
-      }
-      return date + '月\n';
-    }
     const options = {
       theme: 'material',
       hAxis: {
         format: 'M月\nY',
         gridlines: {
           color: 'transparent',
-        },
-        lineDashStyle: [2, 2, 20, 2, 20, 2]
+        }
       },
       crosshair: {
         trigger: 'both',
         orientation: 'vertical',
         opacity: 0.4,
-        // focused: { color: '#3bc', opacity: 0.8 }
       },
       tooltip: {trigger: 'hover', isHtml: true},
       legend: { position: 'none' },
@@ -76,10 +65,12 @@ export class ChartComponent implements OnInit, AfterViewInit {
       vAxes: {
         0: { textPosition: 'none' },
         1: {},
-
       },
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      width: 620,
+      height: 350
     };
-    const a = 0.1;
+
     const data = new google.visualization.DataTable();
     data.addColumn('date', 'type');
     data.addColumn('number', '');
@@ -89,47 +80,39 @@ export class ChartComponent implements OnInit, AfterViewInit {
     data.addColumn('number', '');
     data.addColumn({type: 'string', role: 'tooltip', p: {html: true}});
 
-    data.addRows([
-      [new Date(2018, 8),
-        a, customTooltip(new Date(2018, 8), a, options.colors[0], 'T'),
-        0.13, customTooltip(new Date(2018, 8), 0.13, options.colors[1], 'TB'),
-        0.27, customTooltip(new Date(2018, 8), 0.27, options.colors[2], 'TOP')],
-      [new Date(2018, 9),
-        0.15, customTooltip(new Date(2018, 9), 0.15, options.colors[0], 'T'),
-        0.19, customTooltip(new Date(2018, 9), 0.19, options.colors[1], 'TB'),
-        0.2, customTooltip(new Date(2018, 9), 0.2, options.colors[2], 'TOP')],
-      [new Date(2018, 10),
-        0.18, customTooltip(new Date(2018, 10), 0.18, options.colors[0], 'T'),
-        0.2, customTooltip(new Date(2018, 10), 0.2, options.colors[1], 'TB'),
-        0.27, customTooltip(new Date(2018, 10), 0.27, options.colors[2], 'TOP')],
-      [new Date(2018, 11),
-        0.2, customTooltip(new Date(2018, 11), 0.2, options.colors[0], 'T'),
-        0.3, customTooltip(new Date(2018, 11), 0.3, options.colors[1], 'TB'),
-        0.35, customTooltip(new Date(2018, 11), 0.35, options.colors[2], 'TOP')],
-      [new Date(2019, 0) || 2019,
-        0.1, customTooltip(new Date(2019, 0), 0.1, options.colors[0], 'T'),
-        0.22, customTooltip(new Date(2019, 0), 0.22, options.colors[1], 'TB'),
-        0.35, customTooltip(new Date(2019, 0), 0.35, options.colors[2], 'TOP')],
-    ]);
+    for (let i = 0; i < 5; i++) {
+      const value1 = randomData(0.2, 0);
+      const value2 = randomData(0.3, 0.2);
+      const value3 = randomData(0.4, 0.3);
+      data.addRows([
+        [new Date(2019, i),
+          value1, customTooltip(new Date(2018, 8), value1, options.colors[0], 'T'),
+          value2, customTooltip(new Date(2018, 8), value2, options.colors[1], 'TB'),
+          value3, customTooltip(new Date(2018, 8), value3, options.colors[2], 'TOP')],
+      ]);
+    }
 
     const chart = new google.visualization.LineChart(document.getElementById('my-char-line1'));
     google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
     chart.draw(data, options);
 
+    function randomData(max: number, min: number): number {
+      return parseFloat((((Math.random() * (max - min) + min) * 10) / 10).toFixed(2));
+    }
+
     function placeMarker(dataTable) {
       const cli = this.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      console.log(cli.getYLocation(dataTable.getValue(4, 3)));
       $('.overlay-marker-top')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 50 + 'px';
-      $('.overlay-marker-top')[0].style.left = '420px';
+      $('.overlay-marker-top')[0].style.left = '542px';
       $('.overlay-marker-top')[0].style.color = options.colors[2];
 
       $('.overlay-marker-tb')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 50 + 'px';
-      $('.overlay-marker-tb')[0].style.left = '420px';
+      $('.overlay-marker-tb')[0].style.left = '542px';
       $('.overlay-marker-tb')[0].style.color = options.colors[1];
 
       $('.overlay-marker-t')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 50 + 'px';
-      $('.overlay-marker-t')[0].style.left = '425px';
+      $('.overlay-marker-t')[0].style.left = '542px';
       $('.overlay-marker-t')[0].style.color = options.colors[0];
     }
 
@@ -148,122 +131,6 @@ export class ChartComponent implements OnInit, AfterViewInit {
     }
   }
 
-  clickLoadChartNext() {
-    google.charts.load('current', {'packages': ['corechart']});
-    google.charts.setOnLoadCallback(this.loadChart1);
-  }
-  clickLoadChartPrev() {
-    google.charts.load('current', {'packages': ['corechart']});
-    google.charts.setOnLoadCallback(this.drawChartLine1);
-  }
-
-  loadChart1() {
-    const options = {
-      theme: 'material',
-      hAxis: {
-        format: 'M月\nY',
-        gridlines: {
-          color: 'transparent',
-        },
-      },
-      crosshair: {
-        trigger: 'both',
-        orientation: 'vertical',
-        opacity: 0.4,
-        // focused: { color: '#3bc', opacity: 0.8 }
-      },
-      tooltip: {trigger: 'hover', isHtml: true},
-      legend: { position: 'none' },
-      colors: ['black', 'blue', 'red'],
-      titleTextStyle: {
-        bold: true,
-        fontSize: 16
-      },
-      vAxis: {
-        scaleType: 'linear',
-        format: '#%',
-        viewWindow: {min: 0, max: 0.4},
-        'textStyle': {
-          'fontSize': 16,
-        },
-      },
-      series: {
-        0: { targetAxisIndex: 0, },
-        1: { targetAxisIndex: 1, type: 'line' }
-      },
-      vAxes: {
-        0: { textPosition: 'none' },
-        1: {}
-      },
-    };
-    const a = 0.1;
-    const data = new google.visualization.DataTable();
-    data.addColumn('date', 'type');
-    data.addColumn('number', '');
-    data.addColumn({type: 'string', role: 'tooltip', p: {html: true}});
-    data.addColumn('number', '');
-    data.addColumn({type: 'string', role: 'tooltip', p: {html: true}});
-    data.addColumn('number', '');
-    data.addColumn({type: 'string', role: 'tooltip', p: {html: true}});
-
-    data.addRows([
-      [new Date(2019, 1),
-        a, customTooltip(new Date(2018, 8), a, options.colors[0], 'T'),
-        0.15, customTooltip(new Date(2018, 8), 0.15, options.colors[1], 'TB'),
-        0.3, customTooltip(new Date(2018, 8), 0.3, options.colors[2], 'TOP')],
-      [new Date(2019, 2),
-        0.1, customTooltip(new Date(2018, 9), 0.1, options.colors[0], 'T'),
-        0.16, customTooltip(new Date(2018, 9), 0.16, options.colors[1], 'TB'),
-        0.2, customTooltip(new Date(2018, 9), 0.2, options.colors[2], 'TOP')],
-      [new Date(2019, 3),
-        0.18, customTooltip(new Date(2018, 10), 0.18, options.colors[0], 'T'),
-        0.2, customTooltip(new Date(2018, 10), 0.2, options.colors[1], 'TB'),
-        0.24, customTooltip(new Date(2018, 10), 0.24, options.colors[2], 'TOP')],
-      [new Date(2019, 4),
-        0.2, customTooltip(new Date(2018, 11), 0.2, options.colors[0], 'T'),
-        0.3, customTooltip(new Date(2018, 11), 0.3, options.colors[1], 'TB'),
-        0.35, customTooltip(new Date(2018, 11), 0.35, options.colors[2], 'TOP')],
-      [new Date(2019, 5),
-        0.1, customTooltip(new Date(2019, 0), 0.1, options.colors[0], 'T'),
-        0.22, customTooltip(new Date(2019, 0), 0.22, options.colors[1], 'TB'),
-        0.36, customTooltip(new Date(2019, 0), 0.36, options.colors[2], 'TOP')],
-    ]);
-
-    const chart = new google.visualization.LineChart(document.getElementById('my-char-line1'));
-    google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
-    chart.draw(data, options);
-
-    function placeMarker(dataTable) {
-      const cli = this.getChartLayoutInterface();
-      const chartArea = cli.getChartAreaBoundingBox();
-      console.log(cli.getYLocation(dataTable.getValue(4, 3)));
-      $('.overlay-marker-top')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 50 + 'px';
-      $('.overlay-marker-top')[0].style.left = '420px';
-      $('.overlay-marker-top')[0].style.color = options.colors[2];
-
-      $('.overlay-marker-tb')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 50 + 'px';
-      $('.overlay-marker-tb')[0].style.left = '420px';
-      $('.overlay-marker-tb')[0].style.color = options.colors[1];
-
-      $('.overlay-marker-t')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 50 + 'px';
-      $('.overlay-marker-t')[0].style.left = '425px';
-      $('.overlay-marker-t')[0].style.color = options.colors[0];
-    }
-
-    function customTooltip(date: Date, value: number, color, label: string) {
-      return `<table class="c-tooltip" style="color: ${color}; border: 1px solid ${color}"; width="90px">
-                <tbody>
-                  <tr>
-                    <th colspan="2" ; font-weight: normal">${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日</th>
-                  </tr>
-                  <tr class="">
-                    <td class="name">${label}</td>
-                    <td align="right">${value * 100}%</td>
-                  </tr>
-                </tbody>
-              </table>`;
-    }
-  }
   drawChartLine2() {
     const options = {
       hAxis: {
@@ -301,8 +168,9 @@ export class ChartComponent implements OnInit, AfterViewInit {
         1: {}
       },
       colors: ['black', 'red', 'blue', 'green'],
-      width: 500,
-      height: 300,
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      width: 620,
+      height: 350
     };
 
     const data = new google.visualization.DataTable();
@@ -316,56 +184,45 @@ export class ChartComponent implements OnInit, AfterViewInit {
     data.addColumn('number', '');
     data.addColumn({type: 'string', role: 'tooltip', p: {html: true}});
 
-    data.addRows([
-      [new Date(2018, 8),
-        400, customTooltip(new Date(2018, 8), 400, options.colors[0], 'CT'),
-        1100, customTooltip(new Date(2018, 8), 1100, options.colors[1], 'T'),
-        1300, customTooltip(new Date(2018, 8), 1300, options.colors[2], 'TB'),
-        1800, customTooltip(new Date(2018, 8), 1800, options.colors[3], 'TOP')],
-      [new Date(2018, 9),
-        501, customTooltip(new Date(2018, 9), 501, options.colors[0], 'CT'),
-        752, customTooltip(new Date(2018, 9), 752, options.colors[1], 'T'),
-        1250, customTooltip(new Date(2018, 9), 1250, options.colors[2], 'TB'),
-        1501, customTooltip(new Date(2018, 9), 1501, options.colors[3], 'TB')],
-      [new Date(2018, 10),
-        525, customTooltip(new Date(2018, 10), 525, options.colors[0], 'CT'),
-        530, customTooltip(new Date(2018, 10), 530, options.colors[1], 'T'),
-        1240, customTooltip(new Date(2018, 10), 1240, options.colors[2], 'TB'),
-        1500, customTooltip(new Date(2018, 10), 1500, options.colors[3], 'TOP')],
-      [new Date(2018, 11),
-        800, customTooltip(new Date(2018, 11), 800, options.colors[0], 'CT'),
-        1020, customTooltip(new Date(2018, 11), 1020, options.colors[1], 'T'),
-        1500, customTooltip(new Date(2018, 11), 1500, options.colors[2], 'TB'),
-        1520, customTooltip(new Date(2018, 11), 1520, options.colors[3], 'TOP')],
-      [new Date(2019, 0),
-        150, customTooltip(new Date(2019, 0), 150, options.colors[0], 'CT'),
-        1120, customTooltip(new Date(2019, 0), 1120, options.colors[1], 'T'),
-        1450, customTooltip(new Date(2019, 0), 1450, options.colors[2], 'TB'),
-        1780, customTooltip(new Date(2019, 0), 1780, options.colors[3], 'TOP')],
-    ]);
+    for (let i = 0; i < 5; i++) {
+      const value1 = randomData(500, 0);
+      const value2 = randomData(1000, 500);
+      const value3 = randomData(1500, 1000);
+      const value4 = randomData(1500, 2000);
+      data.addRows([
+        [new Date(2018, i),
+          value1, customTooltip(new Date(2018, i), value1, options.colors[0], 'CT'),
+          value2, customTooltip(new Date(2018, i), value2, options.colors[1], 'T'),
+          value3, customTooltip(new Date(2018, i), value3, options.colors[2], 'TB'),
+          value4, customTooltip(new Date(2018, i), value4, options.colors[3], 'TOP')]
+      ]);
+    }
 
     const chart = new google.visualization.LineChart(document.getElementById('my-chart-line2'));
     google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
     chart.draw(data, options);
 
+    function randomData(max: number, min: number): number {
+      return Math.floor(Math.random() * (max - min) + min);
+    }
+
     function placeMarker(dataTable) {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      console.log(cli.getYLocation(dataTable.getValue(4, 7)));
       $('.overlay-marker-top-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 7))) + 50 + 'px';
-      $('.overlay-marker-top-2')[0].style.left = '420px';
+      $('.overlay-marker-top-2')[0].style.left = '540px';
       $('.overlay-marker-top-2')[0].style.color = options.colors[3];
 
       $('.overlay-marker-tb-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 50 + 'px';
-      $('.overlay-marker-tb-2')[0].style.left = '420px';
+      $('.overlay-marker-tb-2')[0].style.left = '540px';
       $('.overlay-marker-tb-2')[0].style.color = options.colors[2];
 
       $('.overlay-marker-t-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 50 + 'px';
-      $('.overlay-marker-t-2')[0].style.left = '425px';
+      $('.overlay-marker-t-2')[0].style.left = '540px';
       $('.overlay-marker-t-2')[0].style.color = options.colors[1];
 
       $('.overlay-marker-ct-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 50 + 'px';
-      $('.overlay-marker-ct-2')[0].style.left = '425px';
+      $('.overlay-marker-ct-2')[0].style.left = '540px';
       $('.overlay-marker-ct-2')[0].style.color = options.colors[0];
     }
 
@@ -422,8 +279,9 @@ export class ChartComponent implements OnInit, AfterViewInit {
         1: {}
       },
       colors: ['black', 'red', 'blue'],
-      width: 500,
-      height: 300,
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      width: 620,
+      height: 350
     };
 
     const data = new google.visualization.DataTable();
@@ -435,47 +293,39 @@ export class ChartComponent implements OnInit, AfterViewInit {
     data.addColumn('number', '');
     data.addColumn({type: 'string', role: 'tooltip', p: {html: true}});
 
-    data.addRows([
-      [new Date(2018, 8),
-        100, customTooltip(new Date(2018, 8), 100, options.colors[0]),
-        300, customTooltip(new Date(2018, 8), 300, options.colors[1]),
-        400, customTooltip(new Date(2018, 8), 400, options.colors[2])],
-      [new Date(2018, 9),
-        501, customTooltip(new Date(2018, 9), 501, options.colors[0]),
-        752, customTooltip(new Date(2018, 9), 752, options.colors[1]),
-        850, customTooltip(new Date(2018, 9), 850, options.colors[2])],
-      [new Date(2018, 10),
-        525, customTooltip(new Date(2018, 10), 525, options.colors[0]),
-        530, customTooltip(new Date(2018, 10), 530, options.colors[1]),
-        640, customTooltip(new Date(2018, 10), 640, options.colors[2])],
-      [new Date(2018, 11),
-        100, customTooltip(new Date(2018, 11), 100, options.colors[0]),
-        120, customTooltip(new Date(2018, 11), 120, options.colors[1]),
-        800, customTooltip(new Date(2018, 11), 800, options.colors[2])],
-      [new Date(2019, 0),
-        150, customTooltip(new Date(2019, 0), 150, options.colors[0]),
-        220, customTooltip(new Date(2019, 0), 220, options.colors[1]),
-        420, customTooltip(new Date(2019, 0), 420, options.colors[2])],
-    ]);
+    for (let i = 0; i < 5; i++) {
+      const value1 = randomData(250, 0);
+      const value2 = randomData(500, 250);
+      const value3 = randomData(1000, 500);
+      data.addRows([
+        [new Date(2018, i),
+          value1, customTooltip(new Date(2018, i), value1, options.colors[0]),
+          value2, customTooltip(new Date(2018, i), value2, options.colors[1]),
+          value3, customTooltip(new Date(2018, i), value3, options.colors[2])]
+      ]);
+    }
 
     const chart = new google.visualization.LineChart(document.getElementById('my-chart-line3'));
     google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
     chart.draw(data, options);
 
+    function randomData(max: number, min: number): number {
+      return Math.floor(Math.random() * (max - min) + min);
+    }
+
     function placeMarker(dataTable) {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      console.log(cli.getYLocation(dataTable.getValue(4, 5)));
       $('.overlay-marker-top-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 50 + 'px';
-      $('.overlay-marker-top-3')[0].style.left = '420px';
+      $('.overlay-marker-top-3')[0].style.left = '540px';
       $('.overlay-marker-top-3')[0].style.color = options.colors[2];
 
       $('.overlay-marker-tb-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 50 + 'px';
-      $('.overlay-marker-tb-3')[0].style.left = '420px';
+      $('.overlay-marker-tb-3')[0].style.left = '540px';
       $('.overlay-marker-tb-3')[0].style.color = options.colors[1];
 
       $('.overlay-marker-t-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 50 + 'px';
-      $('.overlay-marker-t-3')[0].style.left = '425px';
+      $('.overlay-marker-t-3')[0].style.left = '540px';
       $('.overlay-marker-t-3')[0].style.color = options.colors[0];
     }
 
@@ -503,19 +353,14 @@ export class ChartComponent implements OnInit, AfterViewInit {
     data.addColumn('number', '');
     data.addColumn({type: 'string', role: 'annotation'});
 
-    data.addRows([
-      ['0回', 0.19, '', 0.1, ''],
-      ['1回', 0.117, '', 0.260, ''],
-      ['2回', 0.360, '', 0.300, ''],
-      ['3回', 0.1030, '', 0.240, ''],
-      ['4回', 0.1030, '', 0.140, ''],
-      ['5回', 0.1030, '', 0.340, ''],
-      ['6回', 0.1030, '', 0.240, ''],
-      ['7回', 0.1030, '', 0.340, ''],
-      ['8回', 0.1030, '', 0.240, ''],
-      ['9回', 0.1030, '', 0.340, ''],
-      ['10回', 0.030, '', 0.240, '']
-    ]);
+    for (let i = 0; i < 9; i++) {
+      const value1 = randomData(0.4, 0);
+      const value2 = randomData(0.4, 0);
+      data.addRows([
+        [i + 1 + '回', value1, '', value2, ''],
+      ]);
+    }
+
     const options = {
       tooltip: { isHtml: true },
       bar: {
@@ -542,25 +387,69 @@ export class ChartComponent implements OnInit, AfterViewInit {
       },
       legend: { position: 'none' },
       colors: ['blue', 'green'],
-      width: 600,
-      height: 300,
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      width: 620,
+      height: 350
     };
 
     const chart = new google.visualization.ColumnChart(document.getElementById('my-chart-column'));
     google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
     chart.draw(data, options);
 
+    function randomData(max: number, min: number): number {
+      return parseFloat((((Math.random() * (max - min) + min) * 10) / 10).toFixed(2));
+    }
+
     function placeMarker(dataTable) {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      console.log(cli.getYLocation(dataTable.getValue(0, 1)));
       $('.overlay-marker-41')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 1))) + 30 + 'px';
-      $('.overlay-marker-41')[0].style.left = '110px';
+      $('.overlay-marker-41')[0].style.left = '75px';
       $('.overlay-marker-41')[0].style.color = options.colors[0];
       //
       $('.overlay-marker-42')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 3))) + 30 + 'px';
-      $('.overlay-marker-42')[0].style.left = '132px';
+      $('.overlay-marker-42')[0].style.left = '105px';
       $('.overlay-marker-42')[0].style.color = options.colors[1];
     }
+  }
+
+  clickLoadChart1Next() {
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(this.drawChartLine1);
+    console.log(this.monthChart1);
+  }
+  clickLoadChart1Prev() {
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(this.drawChartLine1);
+  }
+
+  clickLoadChart2Next() {
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(this.drawChartLine2);
+    console.log(this.monthChart1);
+  }
+  clickLoadChart2Prev() {
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(this.drawChartLine2);
+  }
+
+  clickLoadChart3Next() {
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(this.drawChartLine3);
+    console.log(this.monthChart1);
+  }
+  clickLoadChart3Prev() {
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(this.drawChartLine3);
+  }
+
+  clickLoadChart4Next() {
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(this.drawChartColumn);
+    console.log(this.monthChart1);
+  }
+  clickLoadChart4Prev() {
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(this.drawChartColumn);
   }
 }
