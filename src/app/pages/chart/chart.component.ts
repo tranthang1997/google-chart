@@ -299,9 +299,9 @@ export class ChartComponent implements OnInit, AfterViewInit {
       const value3 = randomData(1000, 500);
       data.addRows([
         [new Date(2018, i),
-          value1, customTooltip(new Date(2018, i), value1, options.colors[0]),
-          value2, customTooltip(new Date(2018, i), value2, options.colors[1]),
-          value3, customTooltip(new Date(2018, i), value3, options.colors[2])]
+          value1, customTooltip(new Date(2018, i), value1, options.colors[0], 'T'),
+          value2, customTooltip(new Date(2018, i), value2, options.colors[1], 'TB'),
+          value3, customTooltip(new Date(2018, i), value3, options.colors[2], 'TOP')]
       ]);
     }
 
@@ -329,14 +329,14 @@ export class ChartComponent implements OnInit, AfterViewInit {
       $('.overlay-marker-t-3')[0].style.color = options.colors[0];
     }
 
-    function customTooltip(date: Date, value: number, color) {
+    function customTooltip(date: Date, value: number, color, label: string) {
       return `<table class="c-tooltip" style="color: ${color}; border: 1px solid ${color}"; width="90px">
                 <tbody>
                   <tr>
                     <th colspan="2" ; font-weight: normal">${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日</th>
                   </tr>
                   <tr class="">
-                    <td class="name">Top</td>
+                    <td class="name">${label}</td>
                     <td align="right">${value}回</td>
                   </tr>
                 </tbody>
@@ -353,7 +353,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
     data.addColumn('number', '');
     data.addColumn({type: 'string', role: 'annotation'});
 
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 10; i++) {
       const value1 = randomData(0.4, 0);
       const value2 = randomData(0.4, 0);
       data.addRows([
