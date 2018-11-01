@@ -1,20 +1,32 @@
-<div class="row">
-  <div class="col-md-11" style="text-align: center">{{ "pageTitle" | translate }}</div>
+<div class="row row-1">
+  <div class="col-md-9 text-title" style="text-align: center; margin-left: 120px">{{ "pageTitle" | translate }}</div>
+  <div class="col-md-1" style="margin-right: 0px">
+    <select class="selectOptionAll" (change)="selectOption($event.target.value)">
+      <option value="all">All</option>
+      <option value="1">Chart 1</option>
+      <option value="2">Chart 2</option>
+      <option value="3">Chart 3</option>
+      <option value="4">Chart 4</option>
+    </select>
+  </div>
   <div class="col-md-1">
-    <button type="button"><i class="fa fa-print" aria-hidden="true"></i></button>
+    <button  class="btn-print" type="button" style="cursor: pointer"><i class="fa fa-print" aria-hidden="true" (click)="print()"></i></button>
   </div>
 </div>
 <br>
 <div class="row">
-  <div class="col-md-6">
-    <div style="text-align: center">Title</div>
+  <div class="col-md-6 chart-1" id="chart-1">
     <div class="row" style="text-align: center;">
       <div class="col-md-1">
         <button class="btn-arrow" type="button" style="margin-right: -40px" (click)="clickLoadChart1Prev()">
           <i class="fa fa-arrow-left fa-arrow" aria-hidden="true"></i>
         </button>
       </div>
-      <div class="col-md-9">11月</div>
+      <div class="col-md-9 my-title-line1" >
+        <span style="font-weight: bold">Title</span>
+        <br>
+        11月
+      </div>
       <div class="col-md-1">
         <button class="btn-arrow" type="button" style="margin-left: -100px" (click)="clickLoadChart1Next()">
           <i class="fa fa-arrow-right fa-arrow" aria-hidden="true"></i>
@@ -31,16 +43,19 @@
     <div class="overlay-marker-t">
       <span>T</span>
     </div>
+    <div id="chart-div"></div>
   </div>
-  <div class="col-md-6">
-    <div style="text-align: center">Title</div>
+  <div class="col-md-6 chart-2">
     <div class="row" style="text-align: center;">
       <div class="col-md-1">
         <button type="button" class="btn-arrow" style="margin-right: -40px" (click)="clickLoadChart2Prev()">
           <i class="fa fa-arrow-left fa-arrow" aria-hidden="true"></i>
         </button>
       </div>
-      <div class="col-md-9">11月</div>
+      <div class="col-md-9 my-title-line2">
+        <span style="font-weight: bold">Title</span><br>
+        11月
+      </div>
       <div class="col-md-2">
         <button class="btn-arrow" type="button" style="margin-left: -150px" (click)="clickLoadChart2Next()">
           <i class="fa fa-arrow-right fa-arrow" aria-hidden="true"></i>
@@ -64,15 +79,18 @@
 </div>
 <br>
 <div class="row">
-  <div class="col-md-6">
-    <div style="text-align: center">Title</div>
+  <div class="col-md-6 chart-3">
     <div class="row" style="text-align: center;">
       <div class="col-md-1">
         <button type="button" class="btn-arrow" style="margin-right: -40px" (click)="clickLoadChart3Prev()">
           <i class="fa fa-arrow-left fa-arrow" aria-hidden="true"></i>
         </button>
       </div>
-      <div class="col-md-9">11月</div>
+      <div class="col-md-9 my-title-line3" >
+        <span style="font-weight: bold">Title</span>
+        <br>
+        11月
+      </div>
       <div class="col-md-2">
         <button class="btn-arrow" type="button" style="margin-left: -150px"(click)="clickLoadChart3Next()">
           <i class="fa fa-arrow-right fa-arrow" aria-hidden="true"></i>
@@ -90,15 +108,18 @@
       <span>T</span>
     </div>
   </div>
-  <div class="col-md-6">
-    <div style="text-align: center">Title</div>
+  <div class="col-md-6 chart-4">
     <div class="row" style="text-align: center;">
       <div class="col-md-1">
         <button type="button" class="btn-arrow" style="margin-right: -40px" (click)="clickLoadChart4Prev()">
           <i class="fa fa-arrow-left fa-arrow" aria-hidden="true"></i>
         </button>
       </div>
-      <div class="col-md-9">11月</div>
+      <div class="col-md-9 my-title-line4" >
+        <span style="font-weight: bold">Title</span>
+        <br>
+        11月
+      </div>
       <div class="col-md-2">
         <button class="btn-arrow" type="button" style="margin-left: -150px" (click)="clickLoadChart4Next()">
           <i class="fa fa-arrow-right fa-arrow" aria-hidden="true"></i>

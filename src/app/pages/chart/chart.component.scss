@@ -81,4 +81,49 @@
   top: 53px;   /* chartArea top */
   left: 528px; /* chartArea left */
 }
+@media print
+{
+  //.noprint {display:none;}
+  top: 50;
+}
+
+@media screen
+{
+}
+@media print {
+  div {
+    font-size: 20px;
+  }
+  .my-char-line1 {
+    color: #1AB77C;
+  }
+  .overlay-marker-41 {
+    left: 60;
+  }
+  .chart-line1 {
+     padding-left: 15px;
+   }
+  .title-line1 {
+    left: -170px;
+  }
+  .chart-line2 {
+    padding-left: 15px;
+  }
+  .title-line2 {
+    left: -170px;
+  }
+  .chart-line3 {
+    padding-left: 15px;
+  }
+  .title-line3 {
+    left: -170px;
+  }
+  .chart-column {
+    padding-left: 20px;
+  }
+  .title-line4 {
+    left: -170px;
+  }
+}
+
 

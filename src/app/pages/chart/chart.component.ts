@@ -15,14 +15,11 @@ export class ChartComponent implements OnInit, AfterViewInit {
   eventNext1 = false;
   eventPrev1 = false;
 
-  eventNext2 = false;
-  eventPrev2 = false;
+  eventNext2 = 0;
+  eventPrev2 = 0;
 
   eventNext3 = false;
   eventPrev3 = false;
-
-  eventNext4 = false;
-  eventPrev4 = false;
 
   maxMonth1 = 4;
   curentYear1 = 2019;
@@ -36,11 +33,9 @@ export class ChartComponent implements OnInit, AfterViewInit {
   curentYear3 = 2018;
   minMonth3 = 0;
 
-  maxMonth4 = 4;
-  curentYear4 = 2019;
-  minMonth4 = 0;
-
+  selectedOption: string;
   constructor() {
+    this.selectedOption = 'all';
   }
 
   ngOnInit() {
@@ -1275,11 +1270,11 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function placeMarker(dataTable) {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      $('.overlay-marker-41')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 1))) + 30 + 'px';
+      $('.overlay-marker-41')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 1))) + 15 + 'px';
       $('.overlay-marker-41')[0].style.left = '80px';
       $('.overlay-marker-41')[0].style.color = options.colors[0];
       //
-      $('.overlay-marker-42')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 3))) + 30 + 'px';
+      $('.overlay-marker-42')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 3))) + 15 + 'px';
       $('.overlay-marker-42')[0].style.left = '100px';
       $('.overlay-marker-42')[0].style.color = options.colors[1];
     }
@@ -1310,8 +1305,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
   }
 
   clickLoadChart2Next() {
-    this.eventNext2 = true;
-    if (this.eventPrev2 === true) {
+    this.eventNext2++;
+    if (this.eventPrev2 >= 2) {
       if (this.maxMonth2 <= 3) {
         this.curentYear2++;
       }
@@ -1321,8 +1316,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
     console.log(this.curentYear2);
   }
   clickLoadChart2Prev() {
-    this.eventPrev2 = true;
-    if (this.eventNext2 === true) {
+    this.eventPrev2++;
+    if (this.eventNext2 >= 2) {
       if (this.minMonth2 >= 8) {
         this.curentYear2--;
       }
@@ -1356,10 +1351,93 @@ export class ChartComponent implements OnInit, AfterViewInit {
   clickLoadChart4Next() {
     google.charts.load('current', {'packages': ['corechart']});
     google.charts.setOnLoadCallback(this.drawChartColumn);
-    // console.log(this.monthChart1);
   }
   clickLoadChart4Prev() {
     google.charts.load('current', {'packages': ['corechart']});
     google.charts.setOnLoadCallback(this.drawChartColumn);
+  }
+
+  print() {
+    console.log($('#my-char-line1')[0].innerHTML);
+    if (this.selectedOption === 'all') {
+      $('.selectOptionAll').css('display', 'none');
+      $('.btn-print').css('display', 'none');
+      $('.btn-arrow').css('display', 'none');
+
+      window.print();
+
+      $('.selectOptionAll').css('display', 'block');
+      $('.btn-print').css('display', 'block');
+      $('.btn-arrow').css('display', 'block');
+    } else if (this.selectedOption === '1') {
+      const printContent = $('.chart-1')[0].innerHTML;
+      const originalContents = document.body.innerHTML;
+      document.body.innerHTML = printContent;
+
+      $('#my-chart-line1').addClass('chart-line1');
+      $('.my-title-line1').addClass('title-line1');
+
+      $('.btn-arrow').css('visibility', 'hidden');
+
+      window.print();
+
+      $('.btn-arrow').css('display', 'visible');
+      window.location.reload();
+      document.body.innerHTML = originalContents;
+      $('.selectOptionAll')[0].selectedIndex = 1;
+      console.log($('.selectOptionAll')[0].value);
+    } else if (this.selectedOption === '2') {
+      const printContent = $('.chart-2')[0].innerHTML;
+      const originalContents = document.body.innerHTML;
+      document.body.innerHTML = printContent;
+      $('#my-chart-line2').addClass('chart-line2');
+      $('.my-title-line2').addClass('title-line2');
+
+      $('.btn-arrow').css('visibility', 'hidden');
+      window.print();
+      $('.btn-arrow').css('display', 'visible');
+
+      window.location.reload();
+      document.body.innerHTML = originalContents;
+      $('.selectOptionAll')[0].selectedIndex = 2;
+    } else if (this.selectedOption === '3') {
+      const printContent = $('.chart-3')[0].innerHTML;
+      const originalContents = document.body.innerHTML;
+      document.body.innerHTML = printContent;
+
+      $('#my-chart-line3').addClass('chart-line3');
+      $('.my-title-line3').addClass('title-line3');
+
+      $('.btn-arrow').css('visibility', 'hidden');
+      window.print();
+      $('.btn-arrow').css('display', 'visible');
+
+      window.location.reload();
+      document.body.innerHTML = originalContents;
+      $('.selectOptionAll')[0].selectedIndex = 3;
+    } else {
+      const printContent = $('.chart-4')[0].innerHTML;
+      const originalContents = document.body.innerHTML;
+      document.body.innerHTML = printContent;
+
+      $('#my-chart-column').addClass('chart-column');
+      $('.my-title-line4').addClass('title-line4');
+      $('.btn-arrow').css('visibility', 'hidden');
+
+      window.print();
+
+      $('.btn-arrow').css('display', 'visible');
+      window.location.reload();
+      document.body.innerHTML = originalContents;
+      $('.selectOptionAll')[0].selectedIndex = 4;
+    }
+  }
+
+  selectOption(value: any) {
+    if (value) {
+      this.selectedOption = value;
+    } else {
+      this.selectedOption = 'all';
+    }
   }
 }
