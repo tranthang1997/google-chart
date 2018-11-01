@@ -3,6 +3,7 @@ import {Component, OnInit, AfterViewInit} from '@angular/core';
 declare var google: any;
 declare var googleLoaded: any;
 declare var $: any;
+
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
@@ -15,8 +16,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
   eventNext1 = false;
   eventPrev1 = false;
 
-  eventNext2 = 0;
-  eventPrev2 = 0;
+  eventNext2 = false;
+  eventPrev2 = false;
 
   eventNext3 = false;
   eventPrev3 = false;
@@ -34,6 +35,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
   minMonth3 = 0;
 
   selectedOption: string;
+
   constructor() {
     this.selectedOption = 'all';
   }
@@ -66,7 +68,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         opacity: 0.4,
       },
       tooltip: {trigger: 'hover', isHtml: true},
-      legend: { position: 'none' },
+      legend: {position: 'none'},
       colors: ['black', 'blue', 'red'],
       titleTextStyle: {
         bold: true,
@@ -81,14 +83,14 @@ export class ChartComponent implements OnInit, AfterViewInit {
         },
       },
       series: {
-        0: { targetAxisIndex: 0, },
-        1: { targetAxisIndex: 1, type: 'line' }
+        0: {targetAxisIndex: 0},
+        1: {targetAxisIndex: 1, type: 'line'}
       },
       vAxes: {
-        0: { textPosition: 'none' },
+        0: {textPosition: 'none'},
         1: {},
       },
-      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
       width: 620,
       height: 350
     };
@@ -152,6 +154,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
               </table>`;
     }
   }
+
   loadChart1Next(maxMonth: number, curentYear: number) {
     const options = {
       theme: 'material',
@@ -167,7 +170,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         opacity: 0.4,
       },
       tooltip: {trigger: 'hover', isHtml: true},
-      legend: { position: 'none' },
+      legend: {position: 'none'},
       colors: ['black', 'blue', 'red'],
       titleTextStyle: {
         bold: true,
@@ -182,14 +185,14 @@ export class ChartComponent implements OnInit, AfterViewInit {
         },
       },
       series: {
-        0: { targetAxisIndex: 0, },
-        1: { targetAxisIndex: 1, type: 'line' }
+        0: {targetAxisIndex: 0},
+        1: {targetAxisIndex: 1, type: 'line'}
       },
       vAxes: {
-        0: { textPosition: 'none' },
+        0: {textPosition: 'none'},
         1: {},
       },
-      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
       width: 620,
       height: 350
     };
@@ -303,7 +306,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         opacity: 0.4,
       },
       tooltip: {trigger: 'hover', isHtml: true},
-      legend: { position: 'none' },
+      legend: {position: 'none'},
       colors: ['black', 'blue', 'red'],
       titleTextStyle: {
         bold: true,
@@ -318,14 +321,14 @@ export class ChartComponent implements OnInit, AfterViewInit {
         },
       },
       series: {
-        0: { targetAxisIndex: 0, },
-        1: { targetAxisIndex: 1, type: 'line' }
+        0: {targetAxisIndex: 0},
+        1: {targetAxisIndex: 1, type: 'line'}
       },
       vAxes: {
-        0: { textPosition: 'none' },
+        0: {textPosition: 'none'},
         1: {},
       },
-      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
       width: 620,
       height: 350
     };
@@ -354,7 +357,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
       this.minMonth1 = minMonth - 5;
       this.maxMonth1 = minMonth - 1;
     } else {
-      for (let i = (11 + minMonth)  - 4; i <= 11; i++) {
+      for (let i = (11 + minMonth) - 4; i <= 11; i++) {
         const value1 = randomData(0.2, 0);
         const value2 = randomData(0.3, 0.2);
         const value3 = randomData(0.4, 0.3);
@@ -377,7 +380,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
             value3, customTooltip(new Date(curentYear, j), value3, options.colors[2], 'TOP')],
         ]);
       }
-      this.minMonth1 = (11 + minMonth)  - 4;
+      this.minMonth1 = (11 + minMonth) - 4;
       if (minMonth === 0) {
         this.maxMonth1 = 11;
       } else {
@@ -439,7 +442,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         opacity: 0.4
       },
       tooltip: {trigger: 'hover', isHtml: true},
-      legend: { position: 'none' },
+      legend: {position: 'none'},
       vAxis: {
         format: '#件',
         viewWindow: {min: 0},
@@ -454,15 +457,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
         fontSize: 16
       },
       series: {
-        0: { targetAxisIndex: 0, },
-        1: { targetAxisIndex: 1, type: 'line' }
+        0: {targetAxisIndex: 0},
+        1: {targetAxisIndex: 1, type: 'line'}
       },
       vAxes: {
-        0: { textPosition: 'none' },
+        0: {textPosition: 'none'},
         1: {}
       },
       colors: ['black', 'red', 'blue', 'green'],
-      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
       width: 620,
       height: 350
     };
@@ -549,7 +552,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         opacity: 0.4
       },
       tooltip: {trigger: 'hover', isHtml: true},
-      legend: { position: 'none' },
+      legend: {position: 'none'},
       vAxis: {
         format: '#件',
         viewWindow: {min: 0},
@@ -564,15 +567,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
         fontSize: 16
       },
       series: {
-        0: { targetAxisIndex: 0, },
-        1: { targetAxisIndex: 1, type: 'line' }
+        0: {targetAxisIndex: 0},
+        1: {targetAxisIndex: 1, type: 'line'}
       },
       vAxes: {
-        0: { textPosition: 'none' },
+        0: {textPosition: 'none'},
         1: {}
       },
       colors: ['black', 'red', 'blue', 'green'],
-      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
       width: 620,
       height: 350
     };
@@ -697,7 +700,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         opacity: 0.4
       },
       tooltip: {trigger: 'hover', isHtml: true},
-      legend: { position: 'none' },
+      legend: {position: 'none'},
       vAxis: {
         format: '#件',
         viewWindow: {min: 0},
@@ -712,15 +715,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
         fontSize: 16
       },
       series: {
-        0: { targetAxisIndex: 0, },
-        1: { targetAxisIndex: 1, type: 'line' }
+        0: {targetAxisIndex: 0},
+        1: {targetAxisIndex: 1, type: 'line'}
       },
       vAxes: {
-        0: { textPosition: 'none' },
+        0: {textPosition: 'none'},
         1: {}
       },
       colors: ['black', 'red', 'blue', 'green'],
-      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
       width: 620,
       height: 350
     };
@@ -755,7 +758,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
       this.minMonth2 = minMonth - 5;
       this.maxMonth2 = minMonth - 1;
     } else {
-      for (let i = (11 + minMonth)  - 4; i <= 11; i++) {
+      for (let i = (11 + minMonth) - 4; i <= 11; i++) {
         const value1 = randomData(500, 0);
         const value2 = randomData(1000, 500);
         const value3 = randomData(1500, 1000);
@@ -782,7 +785,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
             value4, customTooltip(new Date(curentYear, j), value4, options.colors[3], 'TOP')]
         ]);
       }
-      this.minMonth2 = (11 + minMonth)  - 4;
+      this.minMonth2 = (11 + minMonth) - 4;
       if (minMonth === 0) {
         this.maxMonth2 = 11;
       } else {
@@ -849,7 +852,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         opacity: 0.4
       },
       tooltip: {trigger: 'hover', isHtml: true},
-      legend: { position: 'none' },
+      legend: {position: 'none'},
       vAxis: {
         format: '#回',
         viewWindow: {min: 0},
@@ -864,15 +867,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
         fontSize: 16
       },
       series: {
-        0: { targetAxisIndex: 0, },
-        1: { targetAxisIndex: 1, type: 'line' }
+        0: {targetAxisIndex: 0},
+        1: {targetAxisIndex: 1, type: 'line'}
       },
       vAxes: {
-        0: { textPosition: 'none' },
+        0: {textPosition: 'none'},
         1: {}
       },
       colors: ['black', 'red', 'blue'],
-      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
       width: 620,
       height: 350
     };
@@ -952,7 +955,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         opacity: 0.4
       },
       tooltip: {trigger: 'hover', isHtml: true},
-      legend: { position: 'none' },
+      legend: {position: 'none'},
       vAxis: {
         format: '#回',
         viewWindow: {min: 0},
@@ -967,15 +970,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
         fontSize: 16
       },
       series: {
-        0: { targetAxisIndex: 0, },
-        1: { targetAxisIndex: 1, type: 'line' }
+        0: {targetAxisIndex: 0},
+        1: {targetAxisIndex: 1, type: 'line'}
       },
       vAxes: {
-        0: { textPosition: 'none' },
+        0: {textPosition: 'none'},
         1: {}
       },
       colors: ['black', 'red', 'blue'],
-      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
       width: 620,
       height: 350
     };
@@ -1087,7 +1090,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         opacity: 0.4
       },
       tooltip: {trigger: 'hover', isHtml: true},
-      legend: { position: 'none' },
+      legend: {position: 'none'},
       vAxis: {
         format: '#回',
         viewWindow: {min: 0},
@@ -1102,15 +1105,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
         fontSize: 16
       },
       series: {
-        0: { targetAxisIndex: 0, },
-        1: { targetAxisIndex: 1, type: 'line' }
+        0: {targetAxisIndex: 0},
+        1: {targetAxisIndex: 1, type: 'line'}
       },
       vAxes: {
-        0: { textPosition: 'none' },
+        0: {textPosition: 'none'},
         1: {}
       },
       colors: ['black', 'red', 'blue'],
-      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
       width: 620,
       height: 350
     };
@@ -1138,9 +1141,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
       }
       this.minMonth3 = minMonth - 5;
       this.maxMonth3 = minMonth - 1;
-      // console.log(this.minMonth1);
     } else {
-      for (let i = (11 + minMonth)  - 4; i <= 11; i++) {
+      for (let i = (11 + minMonth) - 4; i <= 11; i++) {
         const value1 = randomData(250, 0);
         const value2 = randomData(500, 250);
         const value3 = randomData(1000, 500);
@@ -1163,7 +1165,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
             value3, customTooltip(new Date(curentYear, j), value3, options.colors[2], 'TOP')]
         ]);
       }
-      this.minMonth3 = (11 + minMonth)  - 4;
+
+      this.minMonth3 = (11 + minMonth) - 4;
       if (minMonth === 0) {
         this.maxMonth3 = 11;
       } else {
@@ -1229,7 +1232,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
     }
 
     const options = {
-      tooltip: { isHtml: true },
+      tooltip: {isHtml: true},
       bar: {
         groupWidth: '80%',
         borderRadius: 0
@@ -1237,24 +1240,24 @@ export class ChartComponent implements OnInit, AfterViewInit {
       vAxis: {
         viewWindow: {min: 0},
         format: '#%',
-        gridlines: { count: 5 },
+        gridlines: {count: 5},
         ticks: [0, 0.10, 0.20, 0.30, 0.40],
       },
       series: {
-        0: { targetAxisIndex: 0, },
-        1: { targetAxisIndex: 1, type: 'column' }
+        0: {targetAxisIndex: 0},
+        1: {targetAxisIndex: 1, type: 'column'}
       },
       vAxes: {
-        0: { textPosition: 'none' },
+        0: {textPosition: 'none'},
         1: {}
       },
       titleTextStyle: {
         bold: true,
         fontSize: 20
       },
-      legend: { position: 'none' },
+      legend: {position: 'none'},
       colors: ['blue', 'red'],
-      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%' },
+      chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
       width: 620,
       height: 350
     };
@@ -1273,14 +1276,12 @@ export class ChartComponent implements OnInit, AfterViewInit {
       $('.overlay-marker-41')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 1))) + 15 + 'px';
       $('.overlay-marker-41')[0].style.left = '80px';
       $('.overlay-marker-41')[0].style.color = options.colors[0];
-      //
+
       $('.overlay-marker-42')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 3))) + 15 + 'px';
       $('.overlay-marker-42')[0].style.left = '100px';
       $('.overlay-marker-42')[0].style.color = options.colors[1];
     }
   }
-
-
 
   clickLoadChart1Next() {
     this.eventNext1 = true;
@@ -1293,6 +1294,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
     google.charts.setOnLoadCallback(this.loadChart1Next(this.maxMonth1, this.curentYear1));
     console.log(this.maxMonth1);
   }
+
   clickLoadChart1Prev() {
     this.eventPrev1 = true;
     if (this.eventNext1) {
@@ -1305,8 +1307,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
   }
 
   clickLoadChart2Next() {
-    this.eventNext2++;
-    if (this.eventPrev2 >= 2) {
+    this.eventNext2 = true;
+    if (this.eventPrev2) {
       if (this.maxMonth2 <= 3) {
         this.curentYear2++;
       }
@@ -1315,9 +1317,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
     google.charts.setOnLoadCallback(this.loadChart2Next(this.maxMonth2, this.curentYear2));
     console.log(this.curentYear2);
   }
+
   clickLoadChart2Prev() {
-    this.eventPrev2++;
-    if (this.eventNext2 >= 2) {
+    this.eventPrev2 = true;
+    if (this.eventNext2) {
       if (this.minMonth2 >= 8) {
         this.curentYear2--;
       }
@@ -1337,6 +1340,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
     google.charts.load('current', {'packages': ['corechart']});
     google.charts.setOnLoadCallback(this.loadChart3Next(this.maxMonth3, this.curentYear3));
   }
+
   clickLoadChart3Prev() {
     this.eventPrev3 = true;
     if (this.eventNext3) {
@@ -1352,6 +1356,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
     google.charts.load('current', {'packages': ['corechart']});
     google.charts.setOnLoadCallback(this.drawChartColumn);
   }
+
   clickLoadChart4Prev() {
     google.charts.load('current', {'packages': ['corechart']});
     google.charts.setOnLoadCallback(this.drawChartColumn);

@@ -78,12 +78,17 @@
 .overlay-marker-42 {
   font-size: 12px;
   position: absolute;
-  top: 53px;   /* chartArea top */
-  left: 528px; /* chartArea left */
+  top: 53px;
+  left: 528px;
+}
+overlay-marker-43 {
+  font-size: 12px;
+  position: absolute;
+  top: 53px;
+  left: 528px;
 }
 @media print
 {
-  //.noprint {display:none;}
   top: 50;
 }
 
@@ -101,28 +106,29 @@
     left: 60;
   }
   .chart-line1 {
-     padding-left: 15px;
+     padding-left: 25px;
+      margin-bottom: -2000px;
    }
   .title-line1 {
-    left: -170px;
+    left: -180px;
   }
   .chart-line2 {
-    padding-left: 15px;
+    padding-left: 25px;
   }
   .title-line2 {
-    left: -170px;
+    left: -180px;
   }
   .chart-line3 {
-    padding-left: 15px;
+    padding-left: 25px;
   }
   .title-line3 {
-    left: -170px;
+    left: -180px;
   }
   .chart-column {
-    padding-left: 20px;
+    padding-left: 25px;
   }
   .title-line4 {
-    left: -170px;
+    left: -180px;
   }
 }
 
