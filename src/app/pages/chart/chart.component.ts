@@ -55,12 +55,12 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
   drawChartLine1() {
     const options = {
-      theme: 'material',
       hAxis: {
-        format: 'M月\nY',
+        format: 'M月',
+        minorGridlines: {count: 0 },
         gridlines: {
-          color: 'transparent',
-        }
+          color: 'transparent'
+        },
       },
       crosshair: {
         trigger: 'both',
@@ -96,7 +96,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
     };
 
     const data = new google.visualization.DataTable();
-    data.addColumn('date', 'type');
+    data.addColumn('date', '');
     data.addColumn('number', '');
     data.addColumn({type: 'string', role: 'tooltip', p: {html: true}});
     data.addColumn('number', '');
@@ -109,21 +109,33 @@ export class ChartComponent implements OnInit, AfterViewInit {
       const value2 = randomData(0.3, 0.2);
       const value3 = randomData(0.4, 0.3);
       data.addRows([
-        [new Date(2019, i),
-          value1, customTooltip(new Date(2019, i), value1, options.colors[0], 'T'),
-          value2, customTooltip(new Date(2019, i), value2, options.colors[1], 'TB'),
-          value3, customTooltip(new Date(2019, i), value3, options.colors[2], 'TOP')],
+        [new Date(2019, i, 1),
+          value1, customTooltip(new Date(2019, i, 1), value1, options.colors[0], 'T'),
+          value2, customTooltip(new Date(2019, i, 1), value2, options.colors[1], 'TB'),
+          value3, customTooltip(new Date(2019, i, 1), value3, options.colors[2], 'TOP')],
       ]);
     }
-
     const chart = new google.visualization.LineChart(document.getElementById('my-char-line1'));
     google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
+    google.visualization.events.addListener(chart, 'ready', fillYear.bind(chart, data, 2019, 2019));
     chart.draw(data, options);
 
     function randomData(max: number, min: number): number {
       return parseFloat((((Math.random() * (max - min) + min) * 10) / 10).toFixed(2));
     }
 
+    function fillYear(dataTable, firstYear, lastYear) {
+      const cli = this.getChartLayoutInterface();
+
+      $('.first-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-1')[0].style.left = '60px';
+
+      $('.last-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-1')[0].style.left = '530px';
+
+      $('.first-year-1')[0].innerHTML = firstYear;
+      $('.last-year-1')[0].innerHTML = lastYear;
+    }
     function placeMarker(dataTable) {
       const cli = this.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
@@ -156,10 +168,14 @@ export class ChartComponent implements OnInit, AfterViewInit {
   }
 
   loadChart1Next(maxMonth: number, curentYear: number) {
+    let firstYear = 0;
+    let lastYear = 0;
+    let index = -1;
     const options = {
       theme: 'material',
       hAxis: {
-        format: 'M月\nY',
+        format: 'M月',
+        minorGridlines: {count: 0 },
         gridlines: {
           color: 'transparent',
         }
@@ -206,8 +222,6 @@ export class ChartComponent implements OnInit, AfterViewInit {
     data.addColumn('number', '');
     data.addColumn({type: 'string', role: 'tooltip', p: {html: true}});
 
-    // console.log(maxMonth);
-    // console.log(this.maxMonth1);
     if (maxMonth < 7) {
       for (let i = maxMonth + 1; i <= maxMonth + 5; i++) {
         const value1 = randomData(0.2, 0);
@@ -222,6 +236,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
       }
       this.maxMonth1 = maxMonth + 5;
       this.minMonth1 = maxMonth + 1;
+      firstYear = curentYear;
+      lastYear = curentYear;
     } else {
       for (let i = maxMonth + 1; i <= 11; i++) {
         const value1 = randomData(0.2, 0);
@@ -248,16 +264,40 @@ export class ChartComponent implements OnInit, AfterViewInit {
       }
       this.maxMonth1 = 5 - (11 - maxMonth) - 1;
       this.minMonth1 = maxMonth + 1;
-      this.curentYear1++;
+      console.log(maxMonth);
+      if (maxMonth !== 11) {
+        this.curentYear1++;
+      }
+      if (maxMonth === 11) {
+        firstYear = curentYear + 1;
+        lastYear = curentYear + 1;
+      } else {
+        firstYear = curentYear;
+        lastYear = curentYear + 1;
+      }
       console.log(this.maxMonth1);
     }
 
     const chart = new google.visualization.LineChart(document.getElementById('my-char-line1'));
     google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
+    google.visualization.events.addListener(chart, 'ready', fillYear.bind(chart, data, firstYear, lastYear));
     chart.draw(data, options);
 
     function randomData(max: number, min: number): number {
       return parseFloat((((Math.random() * (max - min) + min) * 10) / 10).toFixed(2));
+    }
+
+    function fillYear(dataTable, firstYears, lastYears) {
+      const cli = this.getChartLayoutInterface();
+
+      $('.first-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-1')[0].style.left = '60px';
+
+      $('.last-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-1')[0].style.left = '530px';
+
+      $('.first-year-1')[0].innerHTML = firstYears;
+      $('.last-year-1')[0].innerHTML = lastYears;
     }
 
     function placeMarker(dataTable) {
@@ -292,10 +332,13 @@ export class ChartComponent implements OnInit, AfterViewInit {
   }
 
   loadChart1Prev(minMonth: number, curentYear: number) {
+    let firstYear = 0;
+    let lastYear = 0;
     const options = {
       theme: 'material',
       hAxis: {
-        format: 'M月\nY',
+        format: 'M月',
+        minorGridlines: {count: 0 },
         gridlines: {
           color: 'transparent',
         }
@@ -356,6 +399,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
       }
       this.minMonth1 = minMonth - 5;
       this.maxMonth1 = minMonth - 1;
+      firstYear = curentYear;
+      lastYear = curentYear;
     } else {
       for (let i = (11 + minMonth) - 4; i <= 11; i++) {
         const value1 = randomData(0.2, 0);
@@ -387,14 +432,35 @@ export class ChartComponent implements OnInit, AfterViewInit {
         this.maxMonth1 = minMonth - 1;
       }
       this.curentYear1--;
+      if (minMonth === 0) {
+        firstYear = curentYear - 1;
+        lastYear = curentYear - 1;
+      } else {
+        firstYear = curentYear - 1;
+        lastYear = curentYear;
+      }
     }
 
     const chart = new google.visualization.LineChart(document.getElementById('my-char-line1'));
     google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
+    google.visualization.events.addListener(chart, 'ready', fillYear.bind(chart, data, firstYear, lastYear));
     chart.draw(data, options);
 
     function randomData(max: number, min: number): number {
       return parseFloat((((Math.random() * (max - min) + min) * 10) / 10).toFixed(2));
+    }
+
+    function fillYear(dataTable, firstYears, lastYears) {
+      const cli = this.getChartLayoutInterface();
+
+      $('.first-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-1')[0].style.left = '60px';
+
+      $('.last-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-1')[0].style.left = '530px';
+
+      $('.first-year-1')[0].innerHTML = firstYears;
+      $('.last-year-1')[0].innerHTML = lastYears;
     }
 
     function placeMarker(dataTable) {
@@ -431,7 +497,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
   drawChartLine2() {
     const options = {
       hAxis: {
-        format: 'M月\nY',
+        format: 'M月',
+        minorGridlines: {count: 0 },
         gridlines: {
           color: 'transparent'
         }
@@ -447,7 +514,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         format: '#件',
         viewWindow: {min: 0},
         'textStyle': {
-          'fontSize': 16,
+          'fontSize': 12,
         },
         gridlines: {count: 5},
         ticks: [0, 500, 1000, 1500, 2000]
@@ -497,10 +564,25 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
     const chart = new google.visualization.LineChart(document.getElementById('my-chart-line2'));
     google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
+
+    google.visualization.events.addListener(chart, 'ready', fillYear.bind(chart, data, 2018, 2018));
     chart.draw(data, options);
 
     function randomData(max: number, min: number): number {
       return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function fillYear(dataTable, firstYears, lastYears) {
+      const cli = this.getChartLayoutInterface();
+
+      $('.first-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-2')[0].style.left = '60px';
+
+      $('.last-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-2')[0].style.left = '530px';
+
+      $('.first-year-2')[0].innerHTML = firstYears;
+      $('.last-year-2')[0].innerHTML = lastYears;
     }
 
     function placeMarker(dataTable) {
@@ -539,9 +621,12 @@ export class ChartComponent implements OnInit, AfterViewInit {
   }
 
   loadChart2Next(maxMonth: number, curentYear: number) {
+    let firstYear = 0;
+    let lastYear = 0;
     const options = {
       hAxis: {
-        format: 'M月\nY',
+        format: 'M月',
+        minorGridlines: {count: 0 },
         gridlines: {
           color: 'transparent'
         }
@@ -557,7 +642,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         format: '#件',
         viewWindow: {min: 0},
         'textStyle': {
-          'fontSize': 16,
+          'fontSize': 12,
         },
         gridlines: {count: 5},
         ticks: [0, 500, 1000, 1500, 2000]
@@ -609,6 +694,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
       }
       this.maxMonth2 = maxMonth + 5;
       this.minMonth2 = maxMonth + 1;
+      firstYear = curentYear;
+      lastYear = curentYear;
       console.log(this.maxMonth2);
     } else {
       for (let i = maxMonth + 1; i <= 11; i++) {
@@ -641,14 +728,35 @@ export class ChartComponent implements OnInit, AfterViewInit {
       this.maxMonth2 = 5 - (11 - maxMonth) - 1;
       this.minMonth2 = maxMonth + 1;
       this.curentYear2++;
+      if (maxMonth === 11) {
+        firstYear = curentYear + 1;
+        lastYear = curentYear + 1;
+      } else {
+        firstYear = curentYear;
+        lastYear = curentYear + 1;
+      }
     }
 
     const chart = new google.visualization.LineChart(document.getElementById('my-chart-line2'));
+    google.visualization.events.addListener(chart, 'ready', fillYear.bind(chart, data, firstYear, lastYear));
     google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
     chart.draw(data, options);
 
     function randomData(max: number, min: number): number {
       return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function fillYear(dataTable, firstYears, lastYears) {
+      const cli = this.getChartLayoutInterface();
+
+      $('.first-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-2')[0].style.left = '60px';
+
+      $('.last-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-2')[0].style.left = '530px';
+
+      $('.first-year-2')[0].innerHTML = firstYears;
+      $('.last-year-2')[0].innerHTML = lastYears;
     }
 
     function placeMarker(dataTable) {
@@ -687,9 +795,12 @@ export class ChartComponent implements OnInit, AfterViewInit {
   }
 
   loadChart2Prev(minMonth: number, curentYear: number) {
+    let firstYear = 0;
+    let lastYear = 0;
     const options = {
       hAxis: {
-        format: 'M月\nY',
+        format: 'M月',
+        minorGridlines: {count: 0 },
         gridlines: {
           color: 'transparent'
         }
@@ -705,7 +816,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         format: '#件',
         viewWindow: {min: 0},
         'textStyle': {
-          'fontSize': 16,
+          'fontSize': 12,
         },
         gridlines: {count: 5},
         ticks: [0, 500, 1000, 1500, 2000]
@@ -739,7 +850,6 @@ export class ChartComponent implements OnInit, AfterViewInit {
     data.addColumn('number', '');
     data.addColumn({type: 'string', role: 'tooltip', p: {html: true}});
 
-    // console.log('a');
     console.log(this.curentYear2);
     if (minMonth > 4) {
       for (let i = minMonth - 5; i < minMonth; i++) {
@@ -757,6 +867,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
       }
       this.minMonth2 = minMonth - 5;
       this.maxMonth2 = minMonth - 1;
+      firstYear = curentYear;
+      lastYear = curentYear;
     } else {
       for (let i = (11 + minMonth) - 4; i <= 11; i++) {
         const value1 = randomData(500, 0);
@@ -792,14 +904,35 @@ export class ChartComponent implements OnInit, AfterViewInit {
         this.maxMonth2 = minMonth - 1;
       }
       this.curentYear2--;
+      if (minMonth === 0) {
+        firstYear = curentYear - 1;
+        lastYear = curentYear - 1;
+      } else {
+        firstYear = curentYear - 1;
+        lastYear = curentYear;
+      }
     }
 
     const chart = new google.visualization.LineChart(document.getElementById('my-chart-line2'));
     google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
+    google.visualization.events.addListener(chart, 'ready', fillYear.bind(chart, data, firstYear, lastYear));
     chart.draw(data, options);
 
     function randomData(max: number, min: number): number {
       return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function fillYear(dataTable, firstYears, lastYears) {
+      const cli = this.getChartLayoutInterface();
+
+      $('.first-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-2')[0].style.left = '60px';
+
+      $('.last-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-2')[0].style.left = '530px';
+
+      $('.first-year-2')[0].innerHTML = firstYears;
+      $('.last-year-2')[0].innerHTML = lastYears;
     }
 
     function placeMarker(dataTable) {
@@ -841,7 +974,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
     const options = {
       hAxis: {
-        format: 'M月\nY',
+        format: 'M月',
+        minorGridlines: {count: 0 },
         gridlines: {
           color: 'transparent'
         }
@@ -857,7 +991,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         format: '#回',
         viewWindow: {min: 0},
         'textStyle': {
-          'fontSize': 16,
+          'fontSize': 12,
         },
         gridlines: {count: 5},
         ticks: [0, 250, 500, 750, 1000]
@@ -903,10 +1037,24 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
     const chart = new google.visualization.LineChart(document.getElementById('my-chart-line3'));
     google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
+    google.visualization.events.addListener(chart, 'ready', fillYear.bind(chart, data, 2018, 2018));
     chart.draw(data, options);
 
     function randomData(max: number, min: number): number {
       return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function fillYear(dataTable, firstYears, lastYears) {
+      const cli = this.getChartLayoutInterface();
+
+      $('.first-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-3')[0].style.left = '60px';
+
+      $('.last-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-3')[0].style.left = '530px';
+
+      $('.first-year-3')[0].innerHTML = firstYears;
+      $('.last-year-3')[0].innerHTML = lastYears;
     }
 
     function placeMarker(dataTable) {
@@ -941,10 +1089,12 @@ export class ChartComponent implements OnInit, AfterViewInit {
   }
 
   loadChart3Next(maxMonth: number, curentYear: number) {
-
+    let firstYear = 0;
+    let lastYear = 0;
     const options = {
       hAxis: {
-        format: 'M月\nY',
+        format: 'M月',
+        minorGridlines: {count: 0 },
         gridlines: {
           color: 'transparent'
         }
@@ -960,7 +1110,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         format: '#回',
         viewWindow: {min: 0},
         'textStyle': {
-          'fontSize': 16,
+          'fontSize': 12,
         },
         gridlines: {count: 5},
         ticks: [0, 250, 500, 750, 1000]
@@ -1006,7 +1156,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
       }
       this.maxMonth3 = maxMonth + 5;
       this.minMonth3 = maxMonth + 1;
-      // console.log(this.maxMonth2);
+      firstYear = curentYear;
+      lastYear = curentYear;
     } else {
       for (let i = maxMonth + 1; i <= 11; i++) {
         const value1 = randomData(250, 0);
@@ -1034,14 +1185,35 @@ export class ChartComponent implements OnInit, AfterViewInit {
       this.maxMonth3 = 5 - (11 - maxMonth) - 1;
       this.minMonth3 = maxMonth + 1;
       this.curentYear3++;
+      if (maxMonth === 11) {
+        firstYear = curentYear + 1;
+        lastYear = curentYear + 1;
+      } else {
+        firstYear = curentYear;
+        lastYear = curentYear + 1;
+      }
     }
 
     const chart = new google.visualization.LineChart(document.getElementById('my-chart-line3'));
     google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
+    google.visualization.events.addListener(chart, 'ready', fillYear.bind(chart, data, firstYear, lastYear));
     chart.draw(data, options);
 
     function randomData(max: number, min: number): number {
       return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function fillYear(dataTable, firstYears, lastYears) {
+      const cli = this.getChartLayoutInterface();
+
+      $('.first-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-3')[0].style.left = '60px';
+
+      $('.last-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-3')[0].style.left = '530px';
+
+      $('.first-year-3')[0].innerHTML = firstYears;
+      $('.last-year-3')[0].innerHTML = lastYears;
     }
 
     function placeMarker(dataTable) {
@@ -1076,10 +1248,12 @@ export class ChartComponent implements OnInit, AfterViewInit {
   }
 
   loadChart3Prev(minMonth: number, curentYear: number) {
-
+    let firstYear = 0;
+    let lastYear = 0;
     const options = {
       hAxis: {
-        format: 'M月\nY',
+        format: 'M月',
+        minorGridlines: {count: 0 },
         gridlines: {
           color: 'transparent'
         }
@@ -1095,7 +1269,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         format: '#回',
         viewWindow: {min: 0},
         'textStyle': {
-          'fontSize': 16,
+          'fontSize': 12,
         },
         gridlines: {count: 5},
         ticks: [0, 250, 500, 750, 1000]
@@ -1141,6 +1315,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
       }
       this.minMonth3 = minMonth - 5;
       this.maxMonth3 = minMonth - 1;
+      firstYear = curentYear;
+      lastYear = curentYear;
     } else {
       for (let i = (11 + minMonth) - 4; i <= 11; i++) {
         const value1 = randomData(250, 0);
@@ -1173,14 +1349,35 @@ export class ChartComponent implements OnInit, AfterViewInit {
         this.maxMonth3 = minMonth - 1;
       }
       this.curentYear3--;
+      if (minMonth === 0) {
+        firstYear = curentYear - 1;
+        lastYear = curentYear - 1;
+      } else {
+        firstYear = curentYear - 1;
+        lastYear = curentYear;
+      }
     }
 
     const chart = new google.visualization.LineChart(document.getElementById('my-chart-line3'));
     google.visualization.events.addListener(chart, 'ready', placeMarker.bind(chart, data));
+    google.visualization.events.addListener(chart, 'ready', fillYear.bind(chart, data, firstYear, lastYear));
     chart.draw(data, options);
 
     function randomData(max: number, min: number): number {
       return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function fillYear(dataTable, firstYears, lastYears) {
+      const cli = this.getChartLayoutInterface();
+
+      $('.first-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-3')[0].style.left = '60px';
+
+      $('.last-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-3')[0].style.left = '530px';
+
+      $('.first-year-3')[0].innerHTML = firstYears;
+      $('.last-year-3')[0].innerHTML = lastYears;
     }
 
     function placeMarker(dataTable) {
@@ -1273,20 +1470,25 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function placeMarker(dataTable) {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      $('.overlay-marker-41')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 1))) + 15 + 'px';
+      $('.overlay-marker-41')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 1))) + 30 + 'px';
       $('.overlay-marker-41')[0].style.left = '80px';
       $('.overlay-marker-41')[0].style.color = options.colors[0];
 
-      $('.overlay-marker-42')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 3))) + 15 + 'px';
+      $('.overlay-marker-42')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 3))) + 30 + 'px';
       $('.overlay-marker-42')[0].style.left = '100px';
       $('.overlay-marker-42')[0].style.color = options.colors[1];
+
+      $('.overlay-marker-43')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(9, 4))) + 115 + 'px';
+      $('.overlay-marker-43')[0].style.left = '510px';
+      $('.overlay-marker-43')[0].style.color = 'black';
     }
   }
 
   clickLoadChart1Next() {
     this.eventNext1 = true;
+    console.log(this.maxMonth1);
     if (this.eventPrev1) {
-      if (this.maxMonth1 <= 3) {
+      if (this.maxMonth1 === 11) {
         this.curentYear1++;
       }
     }

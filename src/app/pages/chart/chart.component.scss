@@ -81,7 +81,56 @@
   top: 53px;
   left: 528px;
 }
-overlay-marker-43 {
+.overlay-marker-43 {
+  font-size: 12px;
+  position: absolute;
+  top: 53px;
+  left: 528px;
+}
+
+.overlay-marker-42 {
+  font-size: 12px;
+  position: absolute;
+  top: 53px;
+  left: 528px;
+}
+.overlay-marker-43 {
+  font-size: 12px;
+  position: absolute;
+  top: 53px;
+  left: 528px;
+}
+.first-year-1 {
+  font-size: 12px;
+  position: absolute;
+  top: 53px;
+  left: 528px;
+}
+.last-year-1 {
+  font-size: 12px;
+  position: absolute;
+  top: 53px;
+  left: 528px;
+}
+.first-year-2 {
+  font-size: 12px;
+  position: absolute;
+  top: 53px;
+  left: 528px;
+}
+.last-year-2 {
+  font-size: 12px;
+  position: absolute;
+  top: 53px;
+  left: 528px;
+}
+.first-year-3 {
+  font-size: 12px;
+  position: absolute;
+  top: 53px;
+  left: 528px;
+}
+.last-year-3 {
   font-size: 12px;
   position: absolute;
   top: 53px;
@@ -94,6 +143,10 @@ overlay-marker-43 {
 
 @media screen
 {
+  .chart-column {
+    padding-left: 25px;
+    padding-bottom: 200px;
+  }
 }
 @media print {
   div {
@@ -126,6 +179,10 @@ overlay-marker-43 {
   }
   .chart-column {
     padding-left: 25px;
+    padding-bottom: 100px;
+  }
+  #my-chart-column {
+    padding-bottom: 100px;
   }
   .title-line4 {
     left: -180px;
