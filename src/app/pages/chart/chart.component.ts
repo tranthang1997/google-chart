@@ -141,15 +141,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function placeMarker(dataTable) {
       const cli = this.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      $('.overlay-marker-top')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 50 + 'px';
+      $('.overlay-marker-top')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 70 + 'px';
       $('.overlay-marker-top')[0].style.left = '542px';
       $('.overlay-marker-top')[0].style.color = options.colors[2];
 
-      $('.overlay-marker-tb')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 50 + 'px';
+      $('.overlay-marker-tb')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 70 + 'px';
       $('.overlay-marker-tb')[0].style.left = '542px';
       $('.overlay-marker-tb')[0].style.color = options.colors[1];
 
-      $('.overlay-marker-t')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 50 + 'px';
+      $('.overlay-marker-t')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 70 + 'px';
       $('.overlay-marker-t')[0].style.left = '542px';
       $('.overlay-marker-t')[0].style.color = options.colors[0];
     }
@@ -306,15 +306,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function placeMarker(dataTable) {
       const cli = this.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      $('.overlay-marker-top')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 50 + 'px';
+      $('.overlay-marker-top')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 70 + 'px';
       $('.overlay-marker-top')[0].style.left = '542px';
       $('.overlay-marker-top')[0].style.color = options.colors[2];
 
-      $('.overlay-marker-tb')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 50 + 'px';
+      $('.overlay-marker-tb')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 70 + 'px';
       $('.overlay-marker-tb')[0].style.left = '542px';
       $('.overlay-marker-tb')[0].style.color = options.colors[1];
 
-      $('.overlay-marker-t')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 50 + 'px';
+      $('.overlay-marker-t')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 70 + 'px';
       $('.overlay-marker-t')[0].style.left = '542px';
       $('.overlay-marker-t')[0].style.color = options.colors[0];
     }
@@ -471,15 +471,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function placeMarker(dataTable) {
       const cli = this.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      $('.overlay-marker-top')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 50 + 'px';
+      $('.overlay-marker-top')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 70 + 'px';
       $('.overlay-marker-top')[0].style.left = '542px';
       $('.overlay-marker-top')[0].style.color = options.colors[2];
 
-      $('.overlay-marker-tb')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 50 + 'px';
+      $('.overlay-marker-tb')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 70 + 'px';
       $('.overlay-marker-tb')[0].style.left = '542px';
       $('.overlay-marker-tb')[0].style.color = options.colors[1];
 
-      $('.overlay-marker-t')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 50 + 'px';
+      $('.overlay-marker-t')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 70 + 'px';
       $('.overlay-marker-t')[0].style.left = '542px';
       $('.overlay-marker-t')[0].style.color = options.colors[0];
     }
@@ -595,19 +595,19 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function placeMarker(dataTable) {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      $('.overlay-marker-top-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 7))) + 50 + 'px';
+      $('.overlay-marker-top-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 7))) + 70 + 'px';
       $('.overlay-marker-top-2')[0].style.left = '540px';
       $('.overlay-marker-top-2')[0].style.color = options.colors[3];
 
-      $('.overlay-marker-tb-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 50 + 'px';
+      $('.overlay-marker-tb-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 70 + 'px';
       $('.overlay-marker-tb-2')[0].style.left = '540px';
       $('.overlay-marker-tb-2')[0].style.color = options.colors[2];
 
-      $('.overlay-marker-t-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 50 + 'px';
+      $('.overlay-marker-t-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 70 + 'px';
       $('.overlay-marker-t-2')[0].style.left = '540px';
       $('.overlay-marker-t-2')[0].style.color = options.colors[1];
 
-      $('.overlay-marker-ct-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 50 + 'px';
+      $('.overlay-marker-ct-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 70 + 'px';
       $('.overlay-marker-ct-2')[0].style.left = '540px';
       $('.overlay-marker-ct-2')[0].style.color = options.colors[0];
     }
@@ -771,19 +771,19 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function placeMarker(dataTable) {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      $('.overlay-marker-top-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 7))) + 50 + 'px';
+      $('.overlay-marker-top-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 7))) + 70 + 'px';
       $('.overlay-marker-top-2')[0].style.left = '540px';
       $('.overlay-marker-top-2')[0].style.color = options.colors[3];
 
-      $('.overlay-marker-tb-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 50 + 'px';
+      $('.overlay-marker-tb-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 70 + 'px';
       $('.overlay-marker-tb-2')[0].style.left = '540px';
       $('.overlay-marker-tb-2')[0].style.color = options.colors[2];
 
-      $('.overlay-marker-t-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 50 + 'px';
+      $('.overlay-marker-t-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 70 + 'px';
       $('.overlay-marker-t-2')[0].style.left = '540px';
       $('.overlay-marker-t-2')[0].style.color = options.colors[1];
 
-      $('.overlay-marker-ct-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 50 + 'px';
+      $('.overlay-marker-ct-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 70 + 'px';
       $('.overlay-marker-ct-2')[0].style.left = '540px';
       $('.overlay-marker-ct-2')[0].style.color = options.colors[0];
     }
@@ -949,19 +949,19 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function placeMarker(dataTable) {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      $('.overlay-marker-top-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 7))) + 50 + 'px';
+      $('.overlay-marker-top-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 7))) + 70 + 'px';
       $('.overlay-marker-top-2')[0].style.left = '540px';
       $('.overlay-marker-top-2')[0].style.color = options.colors[3];
 
-      $('.overlay-marker-tb-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 50 + 'px';
+      $('.overlay-marker-tb-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 70 + 'px';
       $('.overlay-marker-tb-2')[0].style.left = '540px';
       $('.overlay-marker-tb-2')[0].style.color = options.colors[2];
 
-      $('.overlay-marker-t-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 50 + 'px';
+      $('.overlay-marker-t-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 70 + 'px';
       $('.overlay-marker-t-2')[0].style.left = '540px';
       $('.overlay-marker-t-2')[0].style.color = options.colors[1];
 
-      $('.overlay-marker-ct-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 50 + 'px';
+      $('.overlay-marker-ct-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 70 + 'px';
       $('.overlay-marker-ct-2')[0].style.left = '540px';
       $('.overlay-marker-ct-2')[0].style.color = options.colors[0];
     }
@@ -1073,15 +1073,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function placeMarker(dataTable) {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      $('.overlay-marker-top-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 50 + 'px';
+      $('.overlay-marker-top-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 70 + 'px';
       $('.overlay-marker-top-3')[0].style.left = '540px';
       $('.overlay-marker-top-3')[0].style.color = options.colors[2];
 
-      $('.overlay-marker-tb-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 50 + 'px';
+      $('.overlay-marker-tb-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 70 + 'px';
       $('.overlay-marker-tb-3')[0].style.left = '540px';
       $('.overlay-marker-tb-3')[0].style.color = options.colors[1];
 
-      $('.overlay-marker-t-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 50 + 'px';
+      $('.overlay-marker-t-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 70 + 'px';
       $('.overlay-marker-t-3')[0].style.left = '540px';
       $('.overlay-marker-t-3')[0].style.color = options.colors[0];
     }
@@ -1234,15 +1234,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function placeMarker(dataTable) {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      $('.overlay-marker-top-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 50 + 'px';
+      $('.overlay-marker-top-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 70 + 'px';
       $('.overlay-marker-top-3')[0].style.left = '540px';
       $('.overlay-marker-top-3')[0].style.color = options.colors[2];
 
-      $('.overlay-marker-tb-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 50 + 'px';
+      $('.overlay-marker-tb-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 70 + 'px';
       $('.overlay-marker-tb-3')[0].style.left = '540px';
       $('.overlay-marker-tb-3')[0].style.color = options.colors[1];
 
-      $('.overlay-marker-t-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 50 + 'px';
+      $('.overlay-marker-t-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 70 + 'px';
       $('.overlay-marker-t-3')[0].style.left = '540px';
       $('.overlay-marker-t-3')[0].style.color = options.colors[0];
     }
@@ -1400,15 +1400,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function placeMarker(dataTable) {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      $('.overlay-marker-top-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 50 + 'px';
+      $('.overlay-marker-top-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 5))) + 70 + 'px';
       $('.overlay-marker-top-3')[0].style.left = '540px';
       $('.overlay-marker-top-3')[0].style.color = options.colors[2];
 
-      $('.overlay-marker-tb-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 50 + 'px';
+      $('.overlay-marker-tb-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 3))) + 70 + 'px';
       $('.overlay-marker-tb-3')[0].style.left = '540px';
       $('.overlay-marker-tb-3')[0].style.color = options.colors[1];
 
-      $('.overlay-marker-t-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 50 + 'px';
+      $('.overlay-marker-t-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 1))) + 70 + 'px';
       $('.overlay-marker-t-3')[0].style.left = '540px';
       $('.overlay-marker-t-3')[0].style.color = options.colors[0];
     }
@@ -1487,11 +1487,11 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function placeMarker(dataTable) {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
-      $('.overlay-marker-41')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 1))) + 30 + 'px';
+      $('.overlay-marker-41')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 1))) + 35 + 'px';
       $('.overlay-marker-41')[0].style.left = '77px';
       $('.overlay-marker-41')[0].style.color = options.colors[0];
 
-      $('.overlay-marker-42')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 3))) + 30 + 'px';
+      $('.overlay-marker-42')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 3))) + 35 + 'px';
       $('.overlay-marker-42')[0].style.left = '97px';
       $('.overlay-marker-42')[0].style.color = options.colors[1];
 
