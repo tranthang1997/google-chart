@@ -91,6 +91,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
         1: {},
       },
       chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
+      pointSize: 5,
+      pointShape: 'circle',
       width: 620,
       height: 350
     };
@@ -127,10 +129,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function fillYear(dataTable, firstYear, lastYear) {
       const cli = this.getChartLayoutInterface();
 
-      $('.first-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 420 + 'px';
       $('.first-year-1')[0].style.left = '60px';
 
-      $('.last-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 420 + 'px';
       $('.last-year-1')[0].style.left = '530px';
 
       $('.first-year-1')[0].innerHTML = firstYear;
@@ -170,7 +172,6 @@ export class ChartComponent implements OnInit, AfterViewInit {
   loadChart1Next(maxMonth: number, curentYear: number) {
     let firstYear = 0;
     let lastYear = 0;
-    let index = -1;
     const options = {
       theme: 'material',
       hAxis: {
@@ -209,6 +210,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
         1: {},
       },
       chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
+      pointSize: 5,
+      pointShape: 'circle',
       width: 620,
       height: 350
     };
@@ -290,10 +293,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function fillYear(dataTable, firstYears, lastYears) {
       const cli = this.getChartLayoutInterface();
 
-      $('.first-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 420 + 'px';
       $('.first-year-1')[0].style.left = '60px';
 
-      $('.last-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 420 + 'px';
       $('.last-year-1')[0].style.left = '530px';
 
       $('.first-year-1')[0].innerHTML = firstYears;
@@ -372,6 +375,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
         1: {},
       },
       chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
+      pointSize: 5,
+      pointShape: 'circle',
       width: 620,
       height: 350
     };
@@ -453,10 +458,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function fillYear(dataTable, firstYears, lastYears) {
       const cli = this.getChartLayoutInterface();
 
-      $('.first-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 420 + 'px';
       $('.first-year-1')[0].style.left = '60px';
 
-      $('.last-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-1')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 420 + 'px';
       $('.last-year-1')[0].style.left = '530px';
 
       $('.first-year-1')[0].innerHTML = firstYears;
@@ -533,6 +538,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
       },
       colors: ['black', 'red', 'blue', 'green'],
       chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
+      pointSize: 5,
+      pointShape: 'circle',
       width: 620,
       height: 350
     };
@@ -575,10 +582,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function fillYear(dataTable, firstYears, lastYears) {
       const cli = this.getChartLayoutInterface();
 
-      $('.first-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 420 + 'px';
       $('.first-year-2')[0].style.left = '60px';
 
-      $('.last-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 420 + 'px';
       $('.last-year-2')[0].style.left = '530px';
 
       $('.first-year-2')[0].innerHTML = firstYears;
@@ -661,6 +668,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
       },
       colors: ['black', 'red', 'blue', 'green'],
       chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
+      pointSize: 5,
+      pointShape: 'circle',
       width: 620,
       height: 350
     };
@@ -749,10 +758,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function fillYear(dataTable, firstYears, lastYears) {
       const cli = this.getChartLayoutInterface();
 
-      $('.first-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 420 + 'px';
       $('.first-year-2')[0].style.left = '60px';
 
-      $('.last-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 420 + 'px';
       $('.last-year-2')[0].style.left = '530px';
 
       $('.first-year-2')[0].innerHTML = firstYears;
@@ -835,6 +844,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
       },
       colors: ['black', 'red', 'blue', 'green'],
       chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
+      pointSize: 5,
+      pointShape: 'circle',
       width: 620,
       height: 350
     };
@@ -925,10 +936,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function fillYear(dataTable, firstYears, lastYears) {
       const cli = this.getChartLayoutInterface();
 
-      $('.first-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 420 + 'px';
       $('.first-year-2')[0].style.left = '60px';
 
-      $('.last-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-2')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 420 + 'px';
       $('.last-year-2')[0].style.left = '530px';
 
       $('.first-year-2')[0].innerHTML = firstYears;
@@ -1010,6 +1021,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
       },
       colors: ['black', 'red', 'blue'],
       chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
+      pointSize: 5,
+      pointShape: 'circle',
       width: 620,
       height: 350
     };
@@ -1047,10 +1060,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function fillYear(dataTable, firstYears, lastYears) {
       const cli = this.getChartLayoutInterface();
 
-      $('.first-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 420 + 'px';
       $('.first-year-3')[0].style.left = '60px';
 
-      $('.last-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 420 + 'px';
       $('.last-year-3')[0].style.left = '530px';
 
       $('.first-year-3')[0].innerHTML = firstYears;
@@ -1129,6 +1142,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
       },
       colors: ['black', 'red', 'blue'],
       chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
+      pointSize: 5,
+      pointShape: 'circle',
       width: 620,
       height: 350
     };
@@ -1206,10 +1221,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function fillYear(dataTable, firstYears, lastYears) {
       const cli = this.getChartLayoutInterface();
 
-      $('.first-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 420 + 'px';
       $('.first-year-3')[0].style.left = '60px';
 
-      $('.last-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 420 + 'px';
       $('.last-year-3')[0].style.left = '530px';
 
       $('.first-year-3')[0].innerHTML = firstYears;
@@ -1288,6 +1303,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
       },
       colors: ['black', 'red', 'blue'],
       chartArea: {left: '10%', right: '15%', width: '80%', height: '80%'},
+      pointSize: 5,
+      pointShape: 'circle',
       width: 620,
       height: 350
     };
@@ -1370,10 +1387,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
     function fillYear(dataTable, firstYears, lastYears) {
       const cli = this.getChartLayoutInterface();
 
-      $('.first-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 430 + 'px';
+      $('.first-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 2))) + 420 + 'px';
       $('.first-year-3')[0].style.left = '60px';
 
-      $('.last-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 430 + 'px';
+      $('.last-year-3')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(4, 4))) + 420 + 'px';
       $('.last-year-3')[0].style.left = '530px';
 
       $('.first-year-3')[0].innerHTML = firstYears;
@@ -1471,14 +1488,14 @@ export class ChartComponent implements OnInit, AfterViewInit {
       const cli = chart.getChartLayoutInterface();
       const chartArea = cli.getChartAreaBoundingBox();
       $('.overlay-marker-41')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 1))) + 30 + 'px';
-      $('.overlay-marker-41')[0].style.left = '80px';
+      $('.overlay-marker-41')[0].style.left = '77px';
       $('.overlay-marker-41')[0].style.color = options.colors[0];
 
       $('.overlay-marker-42')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(0, 3))) + 30 + 'px';
-      $('.overlay-marker-42')[0].style.left = '100px';
+      $('.overlay-marker-42')[0].style.left = '97px';
       $('.overlay-marker-42')[0].style.color = options.colors[1];
 
-      $('.overlay-marker-43')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(9, 4))) + 115 + 'px';
+      $('.overlay-marker-43')[0].style.top = Math.floor(cli.getYLocation(dataTable.getValue(9, 4))) + 105 + 'px';
       $('.overlay-marker-43')[0].style.left = '510px';
       $('.overlay-marker-43')[0].style.color = 'black';
     }
@@ -1581,7 +1598,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
       const originalContents = document.body.innerHTML;
       document.body.innerHTML = printContent;
 
-      $('#my-chart-line1').addClass('chart-line1');
+      $('#my-char-line1').addClass('chart-line1');
       $('.my-title-line1').addClass('title-line1');
 
       $('.btn-arrow').css('visibility', 'hidden');
@@ -1591,7 +1608,6 @@ export class ChartComponent implements OnInit, AfterViewInit {
       $('.btn-arrow').css('display', 'visible');
       window.location.reload();
       document.body.innerHTML = originalContents;
-      $('.selectOptionAll')[0].selectedIndex = 1;
       console.log($('.selectOptionAll')[0].value);
     } else if (this.selectedOption === '2') {
       const printContent = $('.chart-2')[0].innerHTML;
@@ -1606,7 +1622,6 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
       window.location.reload();
       document.body.innerHTML = originalContents;
-      $('.selectOptionAll')[0].selectedIndex = 2;
     } else if (this.selectedOption === '3') {
       const printContent = $('.chart-3')[0].innerHTML;
       const originalContents = document.body.innerHTML;
@@ -1621,7 +1636,6 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
       window.location.reload();
       document.body.innerHTML = originalContents;
-      $('.selectOptionAll')[0].selectedIndex = 3;
     } else {
       const printContent = $('.chart-4')[0].innerHTML;
       const originalContents = document.body.innerHTML;
@@ -1636,7 +1650,6 @@ export class ChartComponent implements OnInit, AfterViewInit {
       $('.btn-arrow').css('display', 'visible');
       window.location.reload();
       document.body.innerHTML = originalContents;
-      $('.selectOptionAll')[0].selectedIndex = 4;
     }
   }
 
